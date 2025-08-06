@@ -3,10 +3,10 @@ import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const Contact = () => {
   return (
-    <section className="min-h-[calc(100vh-8rem)] pt-20 pb-10 px-4 bg-transparent text-white">
+    <section className="min-h-[calc(100vh-8rem)] pt-20 pb-10 px-4 bg-transparent text-indigo-400">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-6">Get in Touch</h1>
-        <p className="text-center text-gray-300 mb-12">
+        <p className="text-center text-fuchsia-300 mb-12">
           Feel free to reach out by filling the form or contacting me directly.
         </p>
 
