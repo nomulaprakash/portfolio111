@@ -14,10 +14,13 @@ const Contact = () => {
     message: ''
   });
 
-  // EmailJS Configuration - You'll need to replace these with your actual values
-  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
-  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
-  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Replace with your EmailJS public key
+  // EmailJS Configuration - Replace these with your actual values from EmailJS dashboard
+  const EMAILJS_SERVICE_ID = 'service_prakash';     // Replace with your EmailJS service ID
+  const EMAILJS_TEMPLATE_ID = 'template_contact';   // Replace with your EmailJS template ID
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';     // Replace with your EmailJS public key
+  
+  // Toggle between demo mode and real EmailJS
+  const USE_DEMO_MODE = true; // Set to false when EmailJS is configured
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,48 +60,58 @@ const Contact = () => {
     setIsLoading(true);
     setStatus({ type: '', message: '' });
 
-    // For demo purposes, simulate email sending
-    // Replace this with actual EmailJS implementation
-    setTimeout(() => {
-      setStatus({ 
-        type: 'success', 
-        message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' 
-      });
-      setIsLoading(false);
-      setFormData({
-        user_name: '',
-        user_email: '',
-        subject: '',
-        message: ''
-      });
-    }, 2000);
-
-    /* Uncomment this when you have EmailJS configured:
-    const emailjs = require('@emailjs/browser'); // Add this line when enabling
-    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
-      .then((result) => {
-        console.log('Email sent successfully:', result.text);
+    if (USE_DEMO_MODE) {
+      // Demo mode - simulates email sending
+      setTimeout(() => {
         setStatus({ 
           type: 'success', 
-          message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' 
+          message: 'Demo mode: Your message would be sent successfully! To receive real emails, configure EmailJS.' 
         });
+        setIsLoading(false);
         setFormData({
           user_name: '',
           user_email: '',
           subject: '',
           message: ''
         });
-      }, (error) => {
-        console.log('Email failed:', error.text);
-        setStatus({ 
-          type: 'error', 
-          message: 'Oops! Something went wrong. Please try again or contact me directly.' 
+      }, 2000);
+    } else {
+      // Real EmailJS implementation
+      // Uncomment the import at the top: import emailjs from '@emailjs/browser';
+      
+      /* Replace YOUR_PUBLIC_KEY above and uncomment this block:
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
+        .then((result) => {
+          console.log('Email sent successfully:', result.text);
+          setStatus({ 
+            type: 'success', 
+            message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' 
+          });
+          setFormData({
+            user_name: '',
+            user_email: '',
+            subject: '',
+            message: ''
+          });
+        }, (error) => {
+          console.log('Email failed:', error.text);
+          setStatus({ 
+            type: 'error', 
+            message: 'Oops! Something went wrong. Please try again or contact me directly.' 
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-      })
-      .finally(() => {
-        setIsLoading(false);
+      */
+      
+      // Temporary fallback if EmailJS is not configured
+      setStatus({ 
+        type: 'error', 
+        message: 'EmailJS not configured yet. Please follow the setup guide to enable real email sending.' 
       });
-    */
+      setIsLoading(false);
+    }
   };
 
   const contactInfo = [
