@@ -1,28 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import organ from '../assets/organ.jpg';
+import portfoliosf from '../assets/portfoliosf.jpg';
+import cap from '../assets/cap.jpg';
 
 const projects = [
   {
     title: "Organ Donation Prediction",
-    image: "/organ.jpg",
+    image: organ,
     description: "A machine learning-based predictive model using classification algorithms to predict organ donation outcomes.",
     demoLink: "https://youtu.be/V9oXkucoJUE?si=GTJoWT0g9oJ3bGFi",
     codeLink: "https://github.com/nomulaprakash",
   },
   {
     title: "Personal Portfolio",
-    image: "/portfoliosf.jpg",
+    image: portfoliosf,
     description: "A personal portfolio built with React, Tailwind CSS, and animations.",
     demoLink: "https://your-portfolio-link.com",
     codeLink: "https://github.com/nomulaprakash",
   },
   {
-    title: "Todo List",
-    image: "/project3.png",
-    description: "Simple Todo list app with local storage and dark mode support.",
-    demoLink: "https://your-todo-app.com",
-    codeLink: "https://github.com/yourusername/todo-app",
+    title: "Graduation Project",
+    image: cap,
+    description: "Academic project showcasing skills learned during university studies.",
+    demoLink: "https://your-graduation-project.com",
+    codeLink: "https://github.com/nomulaprakash",
   },
 ];
 
