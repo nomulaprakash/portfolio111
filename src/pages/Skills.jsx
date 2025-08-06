@@ -3,7 +3,9 @@ import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGithub,
 } from 'react-icons/fa';
 import { SiTailwindcss, SiPython } from 'react-icons/si';
-
+import cisco from '../assets/cisco.jpg';
+import python from '../assets/python.jpg';
+import java from '../assets/java.jpg';
 // Skills array
 const skills = [
   { name: 'HTML', icon: <FaHtml5 className="text-orange-500" /> },
@@ -20,17 +22,17 @@ const skills = [
 const certificates = [
   {
     title: 'Data science Certification',
-    img: '/cisco.jpg',
+    img: cisco,
     link: 'https://drive.google.com/file/d/13T4QjwG6EEBHKtxmZPuNAtyb7Vvedpcw/view?usp=sharing',
   },
   {
     title: 'Python Certification',
-    img: '/python.jpg',
+    img: python,
     link: 'https://drive.google.com/file/d/1OXWyqE-yUUbOLXCkxPo-SQnKE-UewjN2/view?usp=sharing',
   },
   {
     title: 'Java Certification',
-    img: '/java.jpg',
+    img: java,
     link: 'https://drive.google.com/file/d/1tgdIsFxU3KISQaNeZLaX6bDcaAob843d/view?usp=sharing',
   },
 ];
@@ -74,6 +76,15 @@ const Skills = () => {
               src={cert.img}
               alt={cert.title}
               className="w-full h-64 object-cover"
+              onError={(e) => {
+                console.log(`Failed to load image: ${cert.title}`, e);
+                e.target.style.backgroundColor = '#374151';
+                e.target.style.display = 'flex';
+                e.target.style.alignItems = 'center';
+                e.target.style.justifyContent = 'center';
+                e.target.innerHTML = `<span style="color: white;">Image not found</span>`;
+              }}
+              onLoad={() => console.log(`Successfully loaded: ${cert.title}`)}
             />
             <div className="p-6 text-center">
               <p className="text-xl font-semibold text-white">{cert.title}</p>
