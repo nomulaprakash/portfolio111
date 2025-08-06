@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-// import emailjs from '@emailjs/browser'; // Uncomment when EmailJS is configured
+import emailjs from '@emailjs/browser'; // EmailJS for sending emails
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
 const Contact = () => {
@@ -14,13 +14,13 @@ const Contact = () => {
     message: ''
   });
 
-  // EmailJS Configuration - Replace these with your actual values from EmailJS dashboard
-  const EMAILJS_SERVICE_ID = 'service_prakash';     // Replace with your EmailJS service ID
-  const EMAILJS_TEMPLATE_ID = 'template_contact';   // Replace with your EmailJS template ID
-  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';     // Replace with your EmailJS public key
+  // EmailJS Configuration - Replace YOUR_PUBLIC_KEY with your actual public key from EmailJS
+  const EMAILJS_SERVICE_ID = 'service_prakash';     // Use this exact name when creating service
+  const EMAILJS_TEMPLATE_ID = 'template_contact';   // Use this exact name when creating template
+  const EMAILJS_PUBLIC_KEY = 'YOUR_ACTUAL_PUBLIC_KEY_HERE';     // ⚠️ PASTE YOUR PUBLIC KEY HERE
   
   // Toggle between demo mode and real EmailJS
-  const USE_DEMO_MODE = true; // Set to false when EmailJS is configured
+  const USE_DEMO_MODE = true; // ⚠️ Change to false after you get your public key
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -76,13 +76,10 @@ const Contact = () => {
         });
       }, 2000);
     } else {
-      // Real EmailJS implementation
-      // Uncomment the import at the top: import emailjs from '@emailjs/browser';
-      
-      /* Replace YOUR_PUBLIC_KEY above and uncomment this block:
+      // Real EmailJS implementation - This will send actual emails!
       emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
         .then((result) => {
-          console.log('Email sent successfully:', result.text);
+          console.log('✅ Email sent successfully:', result.text);
           setStatus({ 
             type: 'success', 
             message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' 
@@ -93,24 +90,17 @@ const Contact = () => {
             subject: '',
             message: ''
           });
-        }, (error) => {
-          console.log('Email failed:', error.text);
+        })
+        .catch((error) => {
+          console.error('❌ Email failed:', error);
           setStatus({ 
             type: 'error', 
-            message: 'Oops! Something went wrong. Please try again or contact me directly.' 
+            message: 'Oops! Something went wrong. Please check your EmailJS configuration or try again.' 
           });
         })
         .finally(() => {
           setIsLoading(false);
         });
-      */
-      
-      // Temporary fallback if EmailJS is not configured
-      setStatus({ 
-        type: 'error', 
-        message: 'EmailJS not configured yet. Please follow the setup guide to enable real email sending.' 
-      });
-      setIsLoading(false);
     }
   };
 
